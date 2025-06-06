@@ -1,0 +1,42 @@
+# Git Ignore Suggestions for Maven Projects
+
+# Maven build output
+target/
+
+# Maven Wrapper jar (ignore the jar, keep the scripts)
+/.mvn/wrapper/maven-wrapper.jar
+
+# Don't ignore these target folders inside your source/test folders
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Keep resources folder in source control
+!**/src/main/resources/
+
+### Spring Tool Suite (STS) ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### Visual Studio Code ###
+.vscode/
