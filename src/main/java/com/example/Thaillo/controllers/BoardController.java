@@ -2,7 +2,7 @@ package com.example.Thaillo.controllers;
 
 import com.example.Thaillo.dto.BoardRequest;
 import com.example.Thaillo.entities.Board;
-import com.example.Thaillo.repositories.BoardRepository;
+import com.example.Thaillo.services.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,33 +15,23 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BoardController {
 
-    private final BoardRepository boardRepository;
+    private final BoardService boardService;
 
     @GetMapping("/")
     public ResponseEntity<List<Board>> getBoards() {
-        System.out.println("Boards");
-        List<Board> boards = boardRepository.findAll();
+        List<Board> boards = boardService.getAllBoards();
         return ResponseEntity.ok(boards);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Board>> getBoard(@RequestBody Long id) {
-        System.out.println("Boards");
-        Optional<Board> board = boardRepository.findById(id);
-        return ResponseEntity.ok(board);
+    public ResponseEntity<Board> getBoard(@PathVariable Long id) {
+        Optional<Board> board = boardService.getBoardById(id);
+        return board.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping("/")
     public ResponseEntity<Board> postBoard(@RequestBody BoardRequest request) {
-
-        Board board = Board.builder()
-                .title(request.title)
-                .description(request.description)
-                .background(request.background)
-                .build();
-
-        boardRepository.save(board);
-
+        Board board = boardService.createBoard(request);
         return ResponseEntity.ok(board);
     }
 
@@ -49,32 +39,16 @@ public class BoardController {
     public ResponseEntity<Board> updateBoard(
             @PathVariable Long id,
             @RequestBody BoardRequest request) {
-
-        Optional<Board> existing = boardRepository.findById(id);
-        if (existing.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        Board board = existing.get();
-        board.setTitle(request.title);
-        board.setDescription(request.description);
-        board.setBackground(request.background);
-
-        boardRepository.save(board);
-        return ResponseEntity.ok(board);
+        Optional<Board> updated = boardService.updateBoard(id, request);
+        return updated.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBoard(@PathVariable Long id) {
-        if (!boardRepository.existsById(id)) {
+        boolean deleted = boardService.deleteBoard(id);
+        if (!deleted) {
             return ResponseEntity.notFound().build();
         }
-
-        boardRepository.deleteById(id);
-        return ResponseEntity.noContent().build(); // HTTP 204
+        return ResponseEntity.noContent().build();
     }
-
-
-
-
 }

@@ -1,7 +1,7 @@
 package com.example.Thaillo.config;
 
 import com.example.Thaillo.repositories.UserRepository;
-import com.example.Thaillo.service.JwtService;
+import com.example.Thaillo.services.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

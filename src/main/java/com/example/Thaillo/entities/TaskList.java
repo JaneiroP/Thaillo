@@ -10,8 +10,8 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "boards")
-public class Board {
+@Table(name = "task_list")
+public class TaskList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -20,14 +20,12 @@ public class Board {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "description")
-    private String description;
-
     @Column(name = "background")
     @Enumerated(EnumType.STRING)
     private Background background;
 
-//    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private java.util.List<TaskList> taskLists = new java.util.ArrayList<>();
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "board_id", nullable = false)
+//    private Board board;
 
 }
