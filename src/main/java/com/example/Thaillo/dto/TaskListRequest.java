@@ -6,5 +6,6 @@ public class TaskListRequest {
 
     public String title;
     public Background background;
+    public Long board_id;
 
 }

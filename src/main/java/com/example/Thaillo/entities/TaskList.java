@@ -24,8 +24,8 @@ public class TaskList {
     @Enumerated(EnumType.STRING)
     private Background background;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "board_id", nullable = false)
-//    private Board board;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id", nullable = false)
+    private Board board;
 
 }

@@ -27,7 +27,7 @@ public class Board {
     @Enumerated(EnumType.STRING)
     private Background background;
 
-//    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private java.util.List<TaskList> taskLists = new java.util.ArrayList<>();
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+    private java.util.List<TaskList> taskLists = new java.util.ArrayList<>();
 
 }

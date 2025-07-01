@@ -2,7 +2,7 @@ package com.example.Thaillo.controllers;
 
 import com.example.Thaillo.dto.TaskListRequest;
 import com.example.Thaillo.entities.TaskList;
-import com.example.Thaillo.repositories.TaskListRepository;
+import com.example.Thaillo.services.TaskListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,30 +15,23 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TaskListController {
 
-    private final TaskListRepository taskListRepository;
+    private final TaskListService taskListService;
 
     @GetMapping("/")
     public ResponseEntity<List<TaskList>> getTaskList() {
-        List<TaskList> taskLists = taskListRepository.findAll();
+        List<TaskList> taskLists = taskListService.getAllTaskLists();
         return ResponseEntity.ok(taskLists);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<TaskList>> getTaskList(@RequestBody Long id) {
-        Optional<TaskList> taskList = taskListRepository.findById(id);
+        Optional<TaskList> taskList = taskListService.getTaskListById(id);
         return ResponseEntity.ok(taskList);
     }
 
     @PostMapping("/")
     public ResponseEntity<TaskList> postTaskList(@RequestBody TaskListRequest request) {
-
-        TaskList taskList = TaskList.builder()
-                .title(request.title)
-                .background(request.background)
-                .build();
-
-        taskListRepository.save(taskList);
-
+        TaskList taskList = taskListService.createTaskList(request);
         return ResponseEntity.ok(taskList);
     }
 
@@ -46,28 +39,17 @@ public class TaskListController {
     public ResponseEntity<TaskList> updateTaskList(
             @PathVariable Long id,
             @RequestBody TaskListRequest request) {
-
-        Optional<TaskList> existing = taskListRepository.findById(id);
-        if (existing.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        TaskList taskList = existing.get();
-        taskList.setTitle(request.title);
-        taskList.setBackground(request.background);
-
-        taskListRepository.save(taskList);
-        return ResponseEntity.ok(taskList);
+        Optional<TaskList> taskList = taskListService.updateTaskList(id,request);
+        return taskList.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTaskList(@PathVariable Long id) {
-        if (!taskListRepository.existsById(id)) {
+        boolean deleted = taskListService.deleteTaskList(id);
+        if (!deleted) {
             return ResponseEntity.notFound().build();
         }
-
-        taskListRepository.deleteById(id);
-        return ResponseEntity.noContent().build(); // HTTP 204
+        return ResponseEntity.noContent().build();
     }
 
 
