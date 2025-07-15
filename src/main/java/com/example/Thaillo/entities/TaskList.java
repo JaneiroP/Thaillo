@@ -1,6 +1,7 @@
 package com.example.Thaillo.entities;
 
 import com.example.Thaillo.enums.Background;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,6 +27,7 @@ public class TaskList {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id", nullable = false)
+    @JsonBackReference
     private Board board;
 
 }

@@ -1,5 +1,6 @@
 package com.example.Thaillo.dto;
 
+import com.example.Thaillo.entities.Board;
 import com.example.Thaillo.enums.Background;
 
 public class TaskListRequest {

@@ -1,6 +1,7 @@
 package com.example.Thaillo.entities;
 
 import com.example.Thaillo.enums.Background;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,6 +29,7 @@ public class Board {
     private Background background;
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private java.util.List<TaskList> taskLists = new java.util.ArrayList<>();
 
 }
