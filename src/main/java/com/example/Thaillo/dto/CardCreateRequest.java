@@ -2,28 +2,14 @@ package com.example.Thaillo.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-public class CardUpdateRequest {
+public class CardCreateRequest {
     @NotBlank(message = "Title is required")
     public String title;
-
-    public String description;
-
-    public Integer positionInList;
-
-    @NotBlank(message = "isActive is required")
-    public String isActive;
 
     @NotNull(message = "TaskList id is required")
     public Long taskList_id;
 
     @NotNull(message = "CreatedBy id is required")
     public Long createdBy_id;
-
-    public LocalDate dueDate;
-
-    public List<Long> assignedUsers = new ArrayList<>();
 }
