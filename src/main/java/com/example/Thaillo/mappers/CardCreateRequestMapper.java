@@ -11,10 +11,6 @@ public class CardCreateRequestMapper {
     public Card toEntity(CardCreateRequest request, TaskList taskList, User user) {
         return Card.builder()
                 .title(request.title)
-                .description(request.description)
-                .positionInList(request.positionInList)
-                .isActive(request.isActive)
-                .dueDate(request.dueDate)
                 .taskList(taskList)
                 .createdBy(user)
                 .build();
