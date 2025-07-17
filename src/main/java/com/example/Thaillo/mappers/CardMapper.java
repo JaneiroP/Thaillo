@@ -14,8 +14,8 @@ public class CardMapper {
                 .description(card.getDescription())
                 .positionInList(card.getPositionInList())
                 .isActive(card.getIsActive())
-                .taskList_id(card.getTaskList() != null ? card.getTaskList().getId() : null)
-                .createdBy_id(card.getCreatedBy() != null ? card.getCreatedBy().getId() : null)
+                .task_list_id(card.getTaskList() != null ? card.getTaskList().getId() : null)
+                .author_id(card.getAuthor() != null ? card.getAuthor().getId() : null)
                 .dueDate(card.getDueDate())
                 .assignedUsers(card.getAssignedUsers() != null ? card.getAssignedUsers().stream().map(User::getId).toList() : java.util.Collections.emptyList())
                 .build();

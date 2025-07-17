@@ -31,14 +31,14 @@ public class Card {
     private String isActive;
 
     @ManyToOne
-    @JoinColumn(name = "taskList_id", nullable = false)
+    @JoinColumn(name = "task_list_id", nullable = false)
     @JsonBackReference
     private TaskList taskList;
 
     @ManyToOne
-    @JoinColumn(name = "createdBy_id", nullable = false)
+    @JoinColumn(name = "author_id", nullable = false)
     @JsonBackReference
-    private User createdBy;
+    private User author;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

@@ -11,8 +11,8 @@ public class CardResponse {
     public String description;
     public Integer positionInList;
     public String isActive;
-    public Long taskList_id;
-    public Long createdBy_id;
+    public Long task_list_id;
+    public Long author_id;
     public LocalDate dueDate;
     public List<Long> assignedUsers;
 }

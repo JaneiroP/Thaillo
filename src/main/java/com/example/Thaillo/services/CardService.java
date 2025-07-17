@@ -48,10 +48,10 @@ public class CardService {
     // Do not save in DB if some error occur
     @org.springframework.transaction.annotation.Transactional
     public CardResponse createCard(CardCreateRequest request) {
-        logger.info("Creating card with title: {} for taskListId: {} by userId: {}", request.title, request.taskList_id, request.createdBy_id);
+        logger.info("Creating card with title: {} for taskListId: {} by userId: {}", request.title, request.task_list_id, request.author_id);
         // Get TaskList and User objects by ids provided by user
-        TaskList taskList = getTaskListOrThrow(request.taskList_id);
-        User user = getUserOrThrow(request.createdBy_id);
+        TaskList taskList = getTaskListOrThrow(request.task_list_id);
+        User user = getUserOrThrow(request.author_id);
         // Use cardCreateRequestMapper toEntity method for insert only defined parameters
         Card card = cardCreateRequestMapper.toEntity(request, taskList, user);
         // Save in DB
@@ -71,8 +71,8 @@ public class CardService {
             return Optional.empty();
         }
         Card card = existing.get();
-        TaskList taskList = getTaskListOrThrow(request.taskList_id);
-        User user = getUserOrThrow(request.createdBy_id);
+        TaskList taskList = getTaskListOrThrow(request.task_list_id);
+        User user = getUserOrThrow(request.author_id);
         List<User> assignedUsers = getAssignedUsers(request.assignedUsers);
         cardUpdateRequestMapper.updateEntity(card, request, taskList, user, assignedUsers);
         cardRepository.save(card);

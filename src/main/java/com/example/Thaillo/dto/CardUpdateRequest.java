@@ -18,10 +18,10 @@ public class CardUpdateRequest {
     public String isActive;
 
     @NotNull(message = "TaskList id is required")
-    public Long taskList_id;
+    public Long task_list_id;
 
-    @NotNull(message = "CreatedBy id is required")
-    public Long createdBy_id;
+    @NotNull(message = "Author id is required")
+    public Long author_id;
 
     public LocalDate dueDate;
 

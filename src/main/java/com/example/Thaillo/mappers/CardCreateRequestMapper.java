@@ -12,7 +12,7 @@ public class CardCreateRequestMapper {
         return Card.builder()
                 .title(request.title)
                 .taskList(taskList)
-                .createdBy(user)
+                .author(user)
                 .build();
     }
 }

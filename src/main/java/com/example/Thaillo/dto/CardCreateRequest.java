@@ -8,8 +8,8 @@ public class CardCreateRequest {
     public String title;
 
     @NotNull(message = "TaskList id is required")
-    public Long taskList_id;
+    public Long task_list_id;
 
-    @NotNull(message = "CreatedBy id is required")
-    public Long createdBy_id;
+    @NotNull(message = "Author id is required")
+    public Long author_id;
 }

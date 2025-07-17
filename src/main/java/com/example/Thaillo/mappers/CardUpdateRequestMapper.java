@@ -15,7 +15,7 @@ public class CardUpdateRequestMapper {
         card.setPositionInList(request.positionInList);
         card.setIsActive(request.isActive);
         card.setTaskList(taskList);
-        card.setCreatedBy(user);
+        card.setAuthor(user);
         card.setDueDate(request.dueDate);
         card.setAssignedUsers(assignedUsers);
     }
